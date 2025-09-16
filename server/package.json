@@ -1,0 +1,22 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "Matija Vrzan",
+  "license": "ISC",
+  "description": "An Express server designed to handle Salesforce CRM opportunities calculation for Agentforce via the Heroku AppLink integration.",
+  "dependencies": {
+    "@heroku/applink": "^1.0.0",
+    "body-parser": "^2.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.2",
+    "express": "^5.1.0",
+    "nodemon": "^3.1.10"
+  }
+}
