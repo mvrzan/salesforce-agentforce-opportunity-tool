@@ -10,7 +10,7 @@ const initMiddleware = async () => {
     console.log(`${getCurrentTimestamp()} 🔧 - Initializing Salesforce routes...`);
     const { salesforceMiddleware, withSalesforceConfig } = await initSalesforceSdk();
 
-    salesforceRoutes.get(
+    salesforceRoutes.post(
       "/v1/opportunities",
       withSalesforceConfig({ parseRequest: true }),
       salesforceMiddleware,
