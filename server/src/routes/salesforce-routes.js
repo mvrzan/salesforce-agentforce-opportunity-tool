@@ -1,25 +1,20 @@
 import { Router } from "express";
 import { initSalesforceSdk } from "../middleware/heroku-service-mesh.js";
 import { getCurrentTimestamp } from "../utils/loggingUtil.js";
+import opportunitiesHandler from "../controllers/opportunitiesHandler.js";
 
 const salesforceRoutes = Router();
 
 const initMiddleware = async () => {
   try {
     console.log(`${getCurrentTimestamp()} 🔧 - Initializing Salesforce routes...`);
-    const { salesforceMiddleware, withSalesforceConfig, asyncMiddleware } = await initSalesforceSdk();
+    const { salesforceMiddleware, withSalesforceConfig } = await initSalesforceSdk();
 
     salesforceRoutes.get(
-      "/v1/test",
+      "/v1/opportunities",
       withSalesforceConfig({ parseRequest: true }),
       salesforceMiddleware,
-      (_req, res) => {
-        console.log("Request happened! ");
-
-        res.status(200).json({
-          message: "success",
-        });
-      }
+      opportunitiesHandler
     );
 
     console.log(`${getCurrentTimestamp()} ✅ Salesforce routes registered successfully!`);
