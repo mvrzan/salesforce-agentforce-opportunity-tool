@@ -1,6 +1,7 @@
 openapi: 3.0.3
 info:
-	title: Salesforce AgentForce Opportunity Tool API description: API for managing Salesforce opportunities.
+	title: Salesforce AgentForce Opportunity Tool API
+	description: API for managing Salesforce opportunities.
 	version: 1.0.0
 servers:
 	- url: http://localhost:3000
