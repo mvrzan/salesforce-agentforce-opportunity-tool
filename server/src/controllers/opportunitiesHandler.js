@@ -19,8 +19,6 @@ const opportunitiesHandler = async (req, res) => {
     const requestBody = req.body;
     const query = requestBody?.query;
 
-    console.log(org);
-
     console.log(`${getCurrentTimestamp()} 🕵️‍♀️ - opportunitiesHandler - Query received: ${query}`);
 
     if (!query) {
@@ -34,7 +32,7 @@ const opportunitiesHandler = async (req, res) => {
 
     const results = await org.dataApi.query(query);
 
-    console.log("results", results);
+    console.log(`${getCurrentTimestamp()} 🤖  - opportunitiesHandler - Checking results...`, results);
 
     if (results.totalSize === 0) {
       console.error(`${getCurrentTimestamp()} 🚨 - opportunitiesHandler - No results found!`);
@@ -45,6 +43,18 @@ const opportunitiesHandler = async (req, res) => {
     }
 
     const opportunities = results.records.map((rec) => rec.fields);
+
+    if (opportunities[0]?.expr0) {
+      res.status(200).json({
+        message: "success",
+        opportunities: [],
+        result: opportunities[0]?.expr0,
+      });
+
+      console.log(`${getCurrentTimestamp()} 🧮  - opportunitiesHandler - Calculation successfully provided!`);
+
+      return;
+    }
 
     console.log(`${getCurrentTimestamp()} 📋  - opportunitiesHandler - Opportunities found:`, opportunities);
     console.log(`${getCurrentTimestamp()} ✅  - opportunitiesHandler - Query successfully executed!`);
