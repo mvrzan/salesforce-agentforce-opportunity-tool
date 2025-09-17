@@ -1,0 +1,70 @@
+openapi: 3.0.3
+info:
+	title: Salesforce AgentForce Opportunity Tool API
+	description: API for managing Salesforce opportunities.
+	version: 1.0.0
+servers:
+	- url: http://localhost:3000
+		description: Local development server
+paths:
+	/v1/opportunities:
+		get:
+			summary: Query Salesforce opportunities
+			description: Returns a list of opportunities based on a SOQL query provided in the request body.
+			requestBody:
+				required: true
+				content:
+					application/json:
+						schema:
+							type: object
+							properties:
+								query:
+									type: string
+									example: "SELECT Id, Name, StageName, Amount, CloseDate FROM Opportunity WHERE StageName = 'Prospecting'"
+			responses:
+				'200':
+					description: Success. List of opportunities returned.
+					content:
+						application/json:
+							schema:
+								type: object
+								properties:
+									message:
+										type: string
+										example: success
+									opportunities:
+										type: array
+										items:
+											$ref: '#/components/schemas/Opportunity'
+				'500':
+					description: Error or no results found.
+					content:
+						application/json:
+							schema:
+								type: object
+								properties:
+									message:
+										type: string
+										example: "No opportunities found matching your query."
+components:
+	schemas:
+		Opportunity:
+			type: object
+			properties:
+				Id:
+					type: string
+					example: "001xx000003DGbYAAW"
+				Name:
+					type: string
+					example: "Big Deal"
+				StageName:
+					type: string
+					example: "Prospecting"
+				Amount:
+					type: number
+					format: float
+					example: 10000.00
+				CloseDate:
+					type: string
+					format: date
+					example: "2025-09-30"
