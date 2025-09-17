@@ -19,6 +19,8 @@ const opportunitiesHandler = async (req, res) => {
     const requestBody = req.body;
     const query = requestBody?.query;
 
+    console.log(org);
+
     console.log(`${getCurrentTimestamp()} 🕵️‍♀️ - opportunitiesHandler - Query received: ${query}`);
 
     if (!query) {
@@ -31,6 +33,8 @@ const opportunitiesHandler = async (req, res) => {
     }
 
     const results = await org.dataApi.query(query);
+
+    console.log("results", results);
 
     if (results.totalSize === 0) {
       console.error(`${getCurrentTimestamp()} 🚨 - opportunitiesHandler - No results found!`);
