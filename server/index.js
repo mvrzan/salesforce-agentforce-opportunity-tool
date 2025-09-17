@@ -2,6 +2,7 @@ import "dotenv/config";
 import cors from "cors";
 import express from "express";
 import bodyParser from "body-parser";
+import salesforceRoutes from "./src/routes/salesforce-routes.js";
 import { getCurrentTimestamp } from "./src/utils/loggingUtil.js";
 
 const app = express();
@@ -14,6 +15,7 @@ const corsOptions = {
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors(corsOptions));
+app.use(salesforceRoutes);
 
 app.listen(port, () => {
   console.log(`${getCurrentTimestamp()} 🎬 Authentication server listening on port: ${port}`);
