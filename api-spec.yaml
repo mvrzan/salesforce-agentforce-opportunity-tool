@@ -11,6 +11,11 @@ paths:
     post:
       summary: Query Salesforce opportunities
       description: Returns a list of opportunities based on a SOQL query provided in the request body.
+      x-sfdc:
+        heroku:
+          authorization:
+            connectedApp: "Agentforce_Heroku_Tooling"
+            permissionSet: "HerokuAppLink"
       requestBody:
         required: true
         content:
