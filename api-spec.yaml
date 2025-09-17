@@ -8,7 +8,7 @@ servers:
     description: Local development server
 paths:
   /v1/opportunities:
-    get:
+    post:
       summary: Query Salesforce opportunities
       description: Returns a list of opportunities based on a SOQL query provided in the request body.
       requestBody:
