@@ -33,27 +33,44 @@ const opportunitiesHandler = async (req, res) => {
 
     let processedQuery = query;
 
-    const userIdPatterns = [
-      /USER_ID/gi,
-      /\{USER_ID\}/gi,
-      /\{user_id\}/gi,
-      /\{userId\}/gi,
-      /\{current_user_id\}/gi,
-      /\{currentUserId\}/gi,
-      /\$USER_ID/gi,
-      /\$user_id/gi,
-      /\$userId/gi,
-      /<USER_ID>/gi,
-      /<user_id>/gi,
-      /<userId>/gi,
-      /\[USER_ID\]/gi,
-      /\[user_id\]/gi,
-      /\[userId\]/gi,
-      /CURRENT_USER_ID/gi,
-      /currentUserId/g,
-      /current_user_id/gi,
+    // Define patterns for placeholders that are already quoted (replace with just the userId)
+    const quotedUserIdPatterns = [
+      /'USER_ID'/gi,
+      /'user_id'/gi,
+      /'userId'/gi,
+      /'current_user_id'/gi,
+      /'currentUserId'/gi,
+      /'CURRENT_USER_ID'/gi,
       /'PLACEHOLDER_USER_ID'/gi,
+      /"USER_ID"/gi,
+      /"user_id"/gi,
+      /"userId"/gi,
+      /"current_user_id"/gi,
+      /"currentUserId"/gi,
+      /"CURRENT_USER_ID"/gi,
       /"PLACEHOLDER_USER_ID"/gi,
+    ];
+
+    // Define patterns for placeholders that are NOT quoted (replace with quoted userId)
+    const unquotedUserIdPatterns = [
+      /(?<!')USER_ID(?!')/gi,
+      /(?<!')\{USER_ID\}(?!')/gi,
+      /(?<!')\{user_id\}(?!')/gi,
+      /(?<!')\{userId\}(?!')/gi,
+      /(?<!')\{current_user_id\}(?!')/gi,
+      /(?<!')\{currentUserId\}(?!')/gi,
+      /(?<!')\$USER_ID(?!')/gi,
+      /(?<!')\$user_id(?!')/gi,
+      /(?<!')\$userId(?!')/gi,
+      /(?<!')<USER_ID>(?!')/gi,
+      /(?<!')<user_id>(?!')/gi,
+      /(?<!')<userId>(?!')/gi,
+      /(?<!')\[USER_ID\](?!')/gi,
+      /(?<!')\[user_id\](?!')/gi,
+      /(?<!')\[userId\](?!')/gi,
+      /(?<!')CURRENT_USER_ID(?!')/gi,
+      /(?<!')currentUserId(?!')/g,
+      /(?<!')current_user_id(?!')/gi,
       /:User\.Id/gi,
       /:user\.id/gi,
       /:CurrentUser\.Id/gi,
@@ -62,7 +79,17 @@ const opportunitiesHandler = async (req, res) => {
     ];
 
     let hasUserIdPattern = false;
-    for (const pattern of userIdPatterns) {
+
+    // First handle quoted patterns (replace with just the userId, keeping the quotes)
+    for (const pattern of quotedUserIdPatterns) {
+      if (pattern.test(query)) {
+        hasUserIdPattern = true;
+        processedQuery = processedQuery.replace(pattern, `'${userId}'`);
+      }
+    }
+
+    // Then handle unquoted patterns (replace with quoted userId)
+    for (const pattern of unquotedUserIdPatterns) {
       if (pattern.test(query)) {
         hasUserIdPattern = true;
         processedQuery = processedQuery.replace(pattern, `'${userId}'`);
