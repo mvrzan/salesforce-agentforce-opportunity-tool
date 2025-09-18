@@ -18,6 +18,7 @@ const opportunitiesHandler = async (req, res) => {
     const org = context.org;
     const requestBody = req.body;
     const query = requestBody?.query;
+    const userId = org.user.id;
 
     console.log(`${getCurrentTimestamp()} 🕵️‍♀️ - opportunitiesHandler - Query received: ${query}`);
 
@@ -30,7 +31,15 @@ const opportunitiesHandler = async (req, res) => {
       return;
     }
 
-    const results = await org.dataApi.query(query);
+    let processedQuery = query;
+
+    if (query.includes("USER_ID")) {
+      processedQuery = query.replace(/USER_ID/g, userId);
+      console.log(`${getCurrentTimestamp()} 🔄 - opportunitiesHandler - Replaced USER_ID with userId: ${userId}`);
+      console.log(`${getCurrentTimestamp()} 📝 - opportunitiesHandler - Processed query: ${processedQuery}`);
+    }
+
+    const results = await org.dataApi.query(processedQuery);
 
     console.log(`${getCurrentTimestamp()} 🤖  - opportunitiesHandler - Checking results...`, results);
 
