@@ -65,7 +65,7 @@ const opportunitiesHandler = async (req, res) => {
     for (const pattern of userIdPatterns) {
       if (pattern.test(query)) {
         hasUserIdPattern = true;
-        processedQuery = processedQuery.replace(pattern, userId);
+        processedQuery = processedQuery.replace(pattern, `'${userId}'`);
       }
     }
 
