@@ -33,9 +33,42 @@ const opportunitiesHandler = async (req, res) => {
 
     let processedQuery = query;
 
-    if (query.includes("USER_ID")) {
-      processedQuery = query.replace(/USER_ID/g, userId);
-      console.log(`${getCurrentTimestamp()} 🔄 - opportunitiesHandler - Replaced USER_ID with userId: ${userId}`);
+    const userIdPatterns = [
+      /USER_ID/gi,
+      /\{USER_ID\}/gi,
+      /\{user_id\}/gi,
+      /\{userId\}/gi,
+      /\{current_user_id\}/gi,
+      /\{currentUserId\}/gi,
+      /\$USER_ID/gi,
+      /\$user_id/gi,
+      /\$userId/gi,
+      /<USER_ID>/gi,
+      /<user_id>/gi,
+      /<userId>/gi,
+      /\[USER_ID\]/gi,
+      /\[user_id\]/gi,
+      /\[userId\]/gi,
+      /CURRENT_USER_ID/gi,
+      /currentUserId/g,
+      /current_user_id/gi,
+      /'PLACEHOLDER_USER_ID'/gi,
+      /"PLACEHOLDER_USER_ID"/gi,
+    ];
+
+    let hasUserIdPattern = false;
+    for (const pattern of userIdPatterns) {
+      if (pattern.test(query)) {
+        hasUserIdPattern = true;
+        processedQuery = processedQuery.replace(pattern, userId);
+      }
+    }
+
+    if (hasUserIdPattern) {
+      console.log(
+        `${getCurrentTimestamp()} 🔄 - opportunitiesHandler - Replaced user ID placeholders with userId: ${userId}`
+      );
+      console.log(`${getCurrentTimestamp()} 📝 - opportunitiesHandler - Original query: ${query}`);
       console.log(`${getCurrentTimestamp()} 📝 - opportunitiesHandler - Processed query: ${processedQuery}`);
     }
 
