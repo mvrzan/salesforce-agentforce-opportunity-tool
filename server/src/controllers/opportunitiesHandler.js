@@ -54,6 +54,11 @@ const opportunitiesHandler = async (req, res) => {
       /current_user_id/gi,
       /'PLACEHOLDER_USER_ID'/gi,
       /"PLACEHOLDER_USER_ID"/gi,
+      /:User\.Id/gi,
+      /:user\.id/gi,
+      /:CurrentUser\.Id/gi,
+      /:current_user\.id/gi,
+      /:\$User\.Id/gi,
     ];
 
     let hasUserIdPattern = false;
