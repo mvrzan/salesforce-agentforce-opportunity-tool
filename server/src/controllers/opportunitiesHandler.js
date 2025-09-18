@@ -33,7 +33,6 @@ const opportunitiesHandler = async (req, res) => {
 
     let processedQuery = query;
 
-    // Define patterns for placeholders that are already quoted (replace with just the userId)
     const quotedUserIdPatterns = [
       /'USER_ID'/gi,
       /'user_id'/gi,
@@ -51,7 +50,6 @@ const opportunitiesHandler = async (req, res) => {
       /"PLACEHOLDER_USER_ID"/gi,
     ];
 
-    // Define patterns for placeholders that are NOT quoted (replace with quoted userId)
     const unquotedUserIdPatterns = [
       /(?<!')USER_ID(?!')/gi,
       /(?<!')\{USER_ID\}(?!')/gi,
@@ -80,7 +78,6 @@ const opportunitiesHandler = async (req, res) => {
 
     let hasUserIdPattern = false;
 
-    // First handle quoted patterns (replace with just the userId, keeping the quotes)
     for (const pattern of quotedUserIdPatterns) {
       if (pattern.test(query)) {
         hasUserIdPattern = true;
@@ -88,7 +85,6 @@ const opportunitiesHandler = async (req, res) => {
       }
     }
 
-    // Then handle unquoted patterns (replace with quoted userId)
     for (const pattern of unquotedUserIdPatterns) {
       if (pattern.test(query)) {
         hasUserIdPattern = true;
