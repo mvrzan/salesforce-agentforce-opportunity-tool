@@ -39,9 +39,10 @@ paths:
                   opportunities:
                     type: array
                     items:
-                      oneOf:
-                        - $ref: "#/components/schemas/Opportunity"
-                        - $ref: "#/components/schemas/QueryResult"
+                      $ref: "#/components/schemas/Opportunity"
+                  mathResult:
+                    type: string
+                    example: 65500
         "500":
           description: Error or no results found.
           content:
@@ -74,9 +75,3 @@ components:
           type: string
           format: date
           example: "2025-09-30"
-    QueryResult:
-      type: object
-      description: Generic query result object for mathematical operations or custom SOQL queries
-      additionalProperties: true
-      example:
-        expr0: 65500
