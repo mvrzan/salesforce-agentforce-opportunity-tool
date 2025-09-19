@@ -60,18 +60,33 @@ components:
       properties:
         Id:
           type: string
-          example: "001xx000003DGbYAAW"
+          example: "006Ka00000TJEZUIA5"
         Name:
           type: string
-          example: "Big Deal"
+          example: "Omega Technologies"
         StageName:
           type: string
-          example: "Prospecting"
+          example: "Closed Won"
         Amount:
           type: number
           format: float
-          example: 10000.00
+          example: 65500
         CloseDate:
           type: string
           format: date
-          example: "2025-09-30"
+          example: "2025-09-10"
+        AccountId:
+          type: string
+          example: "001Ka00004PqZCIIA3"
+        OwnerId:
+          type: string
+          example: "005Ka000004UsT0IAK"
+        Probability:
+          type: number
+          format: int32
+          minimum: 0
+          maximum: 100
+          example: 100
+        Description:
+          type: string
+          example: "This deal is looking good so far."
