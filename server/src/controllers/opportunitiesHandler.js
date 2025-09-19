@@ -118,7 +118,7 @@ const opportunitiesHandler = async (req, res) => {
       res.status(200).json({
         message: "success",
         opportunities: [opportunities[0]?.expr0],
-        // result: opportunities[0]?.expr0,
+        mathResult: opportunities[0]?.expr0,
       });
 
       console.log(`${getCurrentTimestamp()} 🧮  - opportunitiesHandler - Calculation successfully provided!`);
@@ -132,6 +132,7 @@ const opportunitiesHandler = async (req, res) => {
     res.status(200).json({
       message: "success",
       opportunities,
+      mathResult: "",
     });
   } catch (error) {
     console.error(`${getCurrentTimestamp()} ❌ - opportunitiesHandler - Error occurred: ${error.message}`);
