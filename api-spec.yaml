@@ -41,7 +41,7 @@ paths:
                     items:
                       $ref: "#/components/schemas/Opportunity"
                   mathResult:
-                    type: string
+                    type: number
                     example: 65500
         "500":
           description: Error or no results found.
