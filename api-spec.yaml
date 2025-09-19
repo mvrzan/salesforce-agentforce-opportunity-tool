@@ -10,7 +10,7 @@ paths:
   /v1/opportunities:
     post:
       summary: Query Salesforce opportunities
-      description: Returns a list of opportunities based on a SOQL query provided in the request body.
+      description: Returns a list of opportunities or a mathematical result based on a SOQL query provided in the request body.
       x-sfdc:
         heroku:
           authorization:
