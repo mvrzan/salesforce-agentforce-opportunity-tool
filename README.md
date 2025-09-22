@@ -16,6 +16,7 @@ Learn how you can leverage Heroku AppLink with a Node.js Express server to build
   - [How does it work?](#how-does-it-work)
   - [API Specification](#api-specification)
   - [Project Structure](#project-structure)
+    - [Architecture diagram](#architecture-diagram)
   - [Technologies used](#technologies-used)
 - [Configuration](#configuration)
   - [Requirements](#requirements)
@@ -97,6 +98,10 @@ The API provides a single endpoint for querying Salesforce opportunities:
 │       └── utils/
 │           └── loggingUtil.js           # Logging utilities
 ```
+
+### Architecture diagram
+
+![](./screenshots/architecture-diagram.png)
 
 ## Technologies used
 
