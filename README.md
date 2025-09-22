@@ -12,10 +12,18 @@ Learn how you can leverage Heroku AppLink with a Node.js Express server to build
 
 - [Agentforce Opportunity Tool](#agentforce-opportunity-tool)
 - [Table of Contents](#table-of-contents)
+  - [What does it do?](#what-does-it-do)
+  - [How does it work?](#how-does-it-work)
 - [License](#license)
 - [Disclaimer](#disclaimer)
 
 ---
+
+## What does it do?
+
+This project demonstrates how to leverage [Heroku AppLink](https://devcenter.heroku.com/articles/heroku-applink) to build fast and reliable tools for Agentforce. Specifically, how a Node.js Express application enables Agentforce with natural language processing of Salesforce CRM opportunities.
+
+## How does it work?
 
 # License
 
