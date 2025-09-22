@@ -20,6 +20,8 @@ Learn how you can leverage Heroku AppLink with a Node.js Express server to build
 - [Configuration](#configuration)
   - [Requirements](#requirements)
   - [Setup](#setup)
+    - [Local environment configuration](#local-environment-configuration)
+  - [Deployment](#deployment)
 - [License](#license)
 - [Disclaimer](#disclaimer)
 
@@ -119,6 +121,46 @@ To run this application locally, you will need the following:
 - A [Heroku account](https://signup.heroku.com/)
 
 ## Setup
+
+### Local environment configuration
+
+The first step is to clone the repository and install the project dependencies via a terminal interface by running the `npm install` in the `server` folder:
+
+```
+cd salesforce-agentforce-opportunity-tool/server
+npm install
+```
+
+The second step is to create a `.env` file in the `server` folder. Find the `.env.example` file, copy it and rename it to `.env`.
+
+```
+cd salesforce-agentforce-opportunity-tool/server
+cp .env.example .env
+```
+
+Edit the newly created `.env` files and update the variables with your account specific information.
+
+```
+# Heroku integration details
+HEROKU_INTEGRATION_API_URL=
+HEROKU_INTEGRATION_TOKEN=
+```
+
+Start the development server
+
+```
+npm run dev
+```
+
+In order to get the appropriate `.env` variables for local development and to make the Heroku AppLink integration actually work, please follow the [setup guide](https://devcenter.heroku.com/articles/getting-started-heroku-applink-agentforce?singlepage=true).
+
+Once all of this is done, your server will be available at http://localhost:3000
+
+## Deployment
+
+Once you are happy with your application, you can deploy it to Heroku!
+
+To deploy the application to Heroku, please follow the [official instructions](https://devcenter.heroku.com/articles/git).
 
 # License
 
