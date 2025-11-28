@@ -11,10 +11,6 @@ paths:
     post:
       summary: Query Salesforce opportunities
       description: Returns a list of opportunities or a mathematical result based on a SOQL query provided in the request body.
-      x-sfdc:
-        heroku:
-          authorization:
-            connectedApp: "MyAppLinkConnectedApp"
       requestBody:
         required: true
         content:
